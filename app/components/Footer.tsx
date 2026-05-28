@@ -14,7 +14,7 @@ export default function Footer() {
       background: 'var(--bg)',
       position: 'relative', zIndex: 1,
     }}>
-      <div style={{
+      <div className="footer-inner" style={{
         maxWidth: '1200px', margin: '0 auto', padding: '28px 20px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         flexWrap: 'wrap', gap: '20px',
@@ -46,15 +46,10 @@ export default function Footer() {
           ))}
         </nav>
 
-        {/* Copyright + email */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
-          <p style={{ margin: 0, fontSize: '0.75rem', color: 'rgba(0,0,0,0.30)', fontFamily: 'var(--font-space-grotesk)' }}>
-            © {new Date().getFullYear()} Impulsia
-          </p>
-          {/* <a href="mailto:hola@impulsia.ar" style={{ fontSize: '0.75rem', color: 'rgba(0,0,0,0.40)', textDecoration: 'none', fontFamily: 'var(--font-space-grotesk)' }}>
-            hola@impulsia.ar
-          </a> */}
-        </div>
+        {/* Copyright */}
+        <p style={{ margin: 0, fontSize: '0.75rem', color: 'rgba(0,0,0,0.30)', fontFamily: 'var(--font-space-grotesk)' }}>
+          © {new Date().getFullYear()} Impulsia
+        </p>
 
       </div>
     </footer>
