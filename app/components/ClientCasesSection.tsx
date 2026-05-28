@@ -94,7 +94,7 @@ function ClientCard({ client, visible }: { client: typeof CLIENTS[0]; visible: b
   const { photo, initials, company, sector, linkedin, web, instagram, need, solution, saved, reduction, quote, author, accent, video, preview } = client;
 
   return (
-    <div style={{
+    <div className="client-card" style={{
       background: 'var(--surface)',
       border: '1px solid var(--border)',
       borderRadius: '20px',

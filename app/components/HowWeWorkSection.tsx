@@ -98,7 +98,7 @@ export default function HowWeWorkSection() {
                 transform: on ? 'translateY(0)' : 'translateY(18px)',
                 transition: 'opacity 0.45s ease, transform 0.45s ease',
               }}>
-                <div style={{
+                <div className="step-node" style={{
                   width: '48px', height: '48px', borderRadius: '50%',
                   flexShrink: 0,
                   background: on

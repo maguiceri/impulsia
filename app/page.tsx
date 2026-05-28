@@ -1,5 +1,6 @@
 import HowWeWorkSection from './components/HowWeWorkSection';
 import ClientCasesSection from './components/ClientCasesSection';
+import FadeIn from './components/FadeIn';
 
 const SERVICES_PREVIEW = [
   {
@@ -88,7 +89,7 @@ export default function HeroPage() {
           display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px',
           animation: 'fade-up 0.6s 0.3s ease both', opacity: 0,
         }}>
-          <a href="#contacto" style={{
+          <a href="#contacto" className="cta-btn" style={{
             textDecoration: 'none',
             padding: '14px 36px',
             background: 'linear-gradient(135deg, rgb(99,102,241), rgb(147,51,234))',
@@ -149,25 +150,29 @@ export default function HeroPage() {
       {/* Services */}
       <section id="servicios" style={{ scrollMarginTop: '64px', minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
       <div className="section-inner" style={{ padding: '88px 28px 100px', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
-        <div style={{ marginBottom: '56px' }}>
-          <p style={{ margin: '0 0 12px', fontSize: '0.65rem', letterSpacing: '0.14em', color: 'var(--text2)', textTransform: 'uppercase', fontFamily: 'var(--font-space-grotesk)' }}>
-            Qué hacemos
-          </p>
-          <h2 style={{ margin: 0, fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: '700', lineHeight: 1.2, letterSpacing: '-0.01em', fontFamily: 'var(--font-space-grotesk)' }}>
-            Todo lo que necesitás,{' '}
-            <span style={{ color: 'var(--text2)', fontWeight: '400' }}>sin rodeos</span>
-          </h2>
-        </div>
+        <FadeIn>
+          <div style={{ marginBottom: '56px' }}>
+            <p style={{ margin: '0 0 12px', fontSize: '0.65rem', letterSpacing: '0.14em', color: 'var(--text2)', textTransform: 'uppercase', fontFamily: 'var(--font-space-grotesk)' }}>
+              Qué hacemos
+            </p>
+            <h2 style={{ margin: 0, fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: '700', lineHeight: 1.2, letterSpacing: '-0.01em', fontFamily: 'var(--font-space-grotesk)' }}>
+              Todo lo que necesitás,{' '}
+              <span style={{ color: 'var(--text2)', fontWeight: '400' }}>sin rodeos</span>
+            </h2>
+          </div>
+        </FadeIn>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px' }}>
-          {SERVICES_PREVIEW.map(({ icon, title, desc, accent }) => (
-            <div key={title} style={{
+          {SERVICES_PREVIEW.map(({ icon, title, desc, accent }, i) => (
+            <FadeIn key={title} delay={i * 100}>
+            <div className="service-card" style={{
               padding: '32px 28px',
               background: 'var(--surface)',
               border: '1px solid var(--border)',
               borderRadius: '16px',
               display: 'flex', flexDirection: 'column', gap: '16px',
               position: 'relative', overflow: 'hidden',
+              height: '100%',
             }}>
               <div aria-hidden style={{
                 position: 'absolute', top: 0, left: 0, right: 0, height: '2px',
@@ -191,6 +196,7 @@ export default function HeroPage() {
                 </p>
               </div>
             </div>
+            </FadeIn>
           ))}
         </div>
       </div>
@@ -210,6 +216,7 @@ export default function HeroPage() {
         minHeight: '100vh',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
+        <FadeIn>
         <div className="contacto-inner" style={{
           padding: '56px 48px',
           background: '#ffffff',
@@ -226,7 +233,7 @@ export default function HeroPage() {
           <p style={{ margin: 0, color: 'var(--text2)', fontSize: '1rem', fontFamily: 'var(--font-space-grotesk)', maxWidth: '420px', lineHeight: 1.6 }}>
             Contanos tu proceso y te decimos cómo podemos hacerlo más eficiente.
           </p>
-          <a href="mailto:hola@impulsia.ar" style={{
+          <a href="mailto:hola@impulsia.ar" className="cta-btn" style={{
             textDecoration: 'none',
             padding: '13px 30px',
             background: 'linear-gradient(135deg, rgb(99,102,241), rgb(147,51,234))',
@@ -237,6 +244,7 @@ export default function HeroPage() {
             Agendar llamada gratuita →
           </a>
         </div>
+        </FadeIn>
       </section>
     </>
   );

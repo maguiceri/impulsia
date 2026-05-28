@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Logo from './Logo';
 
 const LINKS = [
@@ -12,6 +12,13 @@ const LINKS = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <>
@@ -21,6 +28,8 @@ export default function Navbar() {
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
         borderBottom: '1px solid rgba(0,0,0,0.08)',
+        boxShadow: scrolled ? '0 4px 24px rgba(0,0,0,0.07)' : 'none',
+        transition: 'box-shadow 0.3s ease',
       }}>
         <nav style={{
           maxWidth: '1200px', margin: '0 auto', padding: '0 20px',
