@@ -1,6 +1,7 @@
 import HowWeWorkSection from './components/HowWeWorkSection';
 import ClientCasesSection from './components/ClientCasesSection';
 import FadeIn from './components/FadeIn';
+import ContactSection from './components/ContactSection';
 
 const SERVICES_PREVIEW = [
   {
@@ -211,41 +212,7 @@ export default function HeroPage() {
       </div>
 
       {/* CTA / Contacto */}
-      <section id="contacto" style={{
-        scrollMarginTop: '64px',
-        minHeight: '100vh',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-      }}>
-        <FadeIn>
-        <div className="contacto-inner" style={{
-          padding: '56px 48px',
-          background: '#ffffff',
-          border: '1px solid rgba(0,0,0,0.09)',
-          borderRadius: '20px',
-          maxWidth: '600px',
-          width: '100%',
-          margin: '0 28px',
-          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', textAlign: 'center',
-        }}>
-          <h2 style={{ margin: 0, fontSize: 'clamp(1.3rem, 3vw, 1.9rem)', fontWeight: '700', letterSpacing: '-0.01em', fontFamily: 'var(--font-space-grotesk)' }}>
-            ¿Listo para automatizar?
-          </h2>
-          <p style={{ margin: 0, color: 'var(--text2)', fontSize: '1rem', fontFamily: 'var(--font-space-grotesk)', maxWidth: '420px', lineHeight: 1.6 }}>
-            Contanos tu proceso y te decimos cómo podemos hacerlo más eficiente.
-          </p>
-          <a href="mailto:hola@impulsia.ar" className="cta-btn" style={{
-            textDecoration: 'none',
-            padding: '13px 30px',
-            background: 'linear-gradient(135deg, rgb(99,102,241), rgb(147,51,234))',
-            borderRadius: '10px',
-            color: 'white', fontSize: '0.95rem',
-            fontFamily: 'var(--font-space-grotesk)', fontWeight: '600',
-          }}>
-            Agendar llamada gratuita →
-          </a>
-        </div>
-        </FadeIn>
-      </section>
+      <ContactSection />
     </>
   );
 }

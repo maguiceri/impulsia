@@ -51,9 +51,9 @@ export default function Footer() {
           <p style={{ margin: 0, fontSize: '0.75rem', color: 'rgba(0,0,0,0.30)', fontFamily: 'var(--font-space-grotesk)' }}>
             © {new Date().getFullYear()} Impulsia
           </p>
-          <a href="mailto:hola@impulsia.ar" style={{ fontSize: '0.75rem', color: 'rgba(0,0,0,0.40)', textDecoration: 'none', fontFamily: 'var(--font-space-grotesk)' }}>
+          {/* <a href="mailto:hola@impulsia.ar" style={{ fontSize: '0.75rem', color: 'rgba(0,0,0,0.40)', textDecoration: 'none', fontFamily: 'var(--font-space-grotesk)' }}>
             hola@impulsia.ar
-          </a>
+          </a> */}
         </div>
 
       </div>

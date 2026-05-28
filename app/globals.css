@@ -82,6 +82,11 @@ body {
   transform: scale(1.08);
 }
 
+@keyframes ring-pulse {
+  0%   { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
 /* ── Ticker ───────────────────────────────────────────────── */
 @keyframes ticker {
   0%   { transform: translateX(0); }
@@ -98,6 +103,10 @@ body {
 /* ── Responsive ───────────────────────────────────────────── */
 
 @media (max-width: 768px) {
+  .contact-grid     { grid-template-columns: 1fr !important; }
+  .contact-left     { border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08) !important; padding: 40px 28px !important; }
+  .contact-right    { padding: 36px 28px !important; }
+
   .nav-links        { display: none !important; }
   .hamburger        { display: flex !important; }
   .mobile-menu      { display: flex; }  /* controlled by JS */

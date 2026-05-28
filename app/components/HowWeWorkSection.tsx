@@ -30,7 +30,7 @@ const STEPS = [
 ];
 
 export default function HowWeWorkSection() {
-  const ref  = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLElement>(null);
   const [active, setActive] = useState(-1);
 
   useEffect(() => {
@@ -39,9 +39,7 @@ export default function HowWeWorkSection() {
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          STEPS.forEach((_, i) => {
-            setTimeout(() => setActive(i), i * 550);
-          });
+          STEPS.forEach((_, i) => setTimeout(() => setActive(i), i * 550));
           obs.disconnect();
         }
       },
@@ -51,10 +49,14 @@ export default function HowWeWorkSection() {
     return () => obs.disconnect();
   }, []);
 
-  const lineW = active <= 0 ? 0 : (active / (STEPS.length - 1)) * 100;
+  // Empieza a moverse cuando activa el paso i, llega al siguiente cuando activa i+1
+  const lineW = active < 0 ? 0 : Math.min(((active + 1) / (STEPS.length - 1)) * 100, 100);
 
   return (
-    <section ref={ref} className="section-inner" style={{ padding: '88px 28px 100px', maxWidth: '1100px', margin: '0 auto', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+    <section ref={ref} style={{
+      padding: '88px 28px 100px', maxWidth: '1100px', margin: '0 auto',
+      minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center',
+    }}>
 
       <div style={{ marginBottom: '64px' }}>
         <p style={{ margin: '0 0 12px', fontSize: '0.65rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontFamily: 'var(--font-space-grotesk)', fontWeight: '600', background: 'linear-gradient(135deg, rgb(99,102,241), rgb(217,70,239))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
@@ -69,25 +71,20 @@ export default function HowWeWorkSection() {
       <div style={{ position: 'relative' }}>
 
         <div className="timeline-aux" style={{
-          position: 'absolute',
-          top: '23px', left: '24px', right: '24px',
-          height: '2px',
-          background: 'rgba(0,0,0,0.10)',
-          borderRadius: '2px',
-        }} />
+          position: 'absolute', top: '23px', left: '24px', right: '24px',
+          height: '2px', background: 'rgba(0,0,0,0.10)', borderRadius: '2px',
+          overflow: 'hidden',
+        }}>
+          <div style={{
+            height: '100%',
+            width: `${lineW}%`,
+            background: 'linear-gradient(90deg, rgb(99,102,241), rgb(130,60,245), rgb(217,70,239))',
+            borderRadius: '2px',
+            transition: 'width 0.52s cubic-bezier(0.4, 0, 0.2, 1)',
+          }} />
+        </div>
 
-        <div className="timeline-aux" style={{
-          position: 'absolute',
-          top: '23px', left: '24px',
-          height: '2px',
-          width: `calc(${lineW}% * (100% - 48px) / 100)`,
-          maxWidth: 'calc(100% - 48px)',
-          background: 'linear-gradient(90deg, rgb(99,102,241), rgb(130,60,245), rgb(217,70,239))',
-          borderRadius: '2px',
-          transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-        }} />
-
-        <div className="timeline-steps" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0' }}>
+        <div className="timeline-steps" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
           {STEPS.map(({ n, title, desc, accent }, i) => {
             const on = active >= i;
             return (
@@ -99,11 +96,8 @@ export default function HowWeWorkSection() {
                 transition: 'opacity 0.45s ease, transform 0.45s ease',
               }}>
                 <div className="step-node" style={{
-                  width: '48px', height: '48px', borderRadius: '50%',
-                  flexShrink: 0,
-                  background: on
-                    ? `linear-gradient(135deg, rgb(99,102,241) ${i * 30}%, ${accent})`
-                    : 'var(--surface2)',
+                  width: '48px', height: '48px', borderRadius: '50%', flexShrink: 0,
+                  background: on ? `linear-gradient(135deg, rgb(99,102,241) ${i * 30}%, ${accent})` : 'var(--surface2)',
                   border: on ? 'none' : '1px solid rgba(0,0,0,0.10)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: '0.7rem', fontFamily: 'var(--font-space-grotesk)', fontWeight: '700',
@@ -117,21 +111,16 @@ export default function HowWeWorkSection() {
 
                 <div style={{ textAlign: 'center' }}>
                   <h3 style={{
-                    margin: '0 0 8px',
-                    fontSize: '0.82rem', fontWeight: '700',
-                    fontFamily: 'var(--font-space-grotesk)',
-                    letterSpacing: '0.02em',
-                    color: on ? 'var(--text)' : 'var(--text2)',
-                    transition: 'color 0.4s ease',
+                    margin: '0 0 8px', fontSize: '0.82rem', fontWeight: '700',
+                    fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.02em',
+                    color: on ? 'var(--text)' : 'var(--text2)', transition: 'color 0.4s ease',
                   }}>
                     {title}
                   </h3>
                   <p style={{
-                    margin: 0,
-                    fontSize: '0.82rem', lineHeight: 1.6,
+                    margin: 0, fontSize: '0.82rem', lineHeight: 1.6,
                     color: on ? 'var(--text2)' : 'rgba(0,0,0,0.22)',
-                    fontFamily: 'var(--font-space-grotesk)',
-                    transition: 'color 0.4s ease',
+                    fontFamily: 'var(--font-space-grotesk)', transition: 'color 0.4s ease',
                   }}>
                     {desc}
                   </p>
