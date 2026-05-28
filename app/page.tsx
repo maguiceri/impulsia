@@ -152,7 +152,7 @@ export default function HeroPage() {
       <div className="section-inner" style={{ padding: '88px 28px 100px', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
         <FadeIn>
           <div style={{ marginBottom: '56px' }}>
-            <p style={{ margin: '0 0 12px', fontSize: '0.65rem', letterSpacing: '0.14em', color: 'var(--text2)', textTransform: 'uppercase', fontFamily: 'var(--font-space-grotesk)' }}>
+            <p style={{ margin: '0 0 12px', fontSize: '0.65rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontFamily: 'var(--font-space-grotesk)', fontWeight: '600', background: 'linear-gradient(135deg, rgb(99,102,241), rgb(217,70,239))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               Qué hacemos
             </p>
             <h2 style={{ margin: 0, fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: '700', lineHeight: 1.2, letterSpacing: '-0.01em', fontFamily: 'var(--font-space-grotesk)' }}>

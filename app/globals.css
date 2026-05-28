@@ -24,10 +24,27 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image: radial-gradient(circle, rgba(0,0,0,0.065) 1px, transparent 1px);
+  background-size: 28px 28px;
   color: var(--text);
   font-family: var(--font-space-grotesk), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+@keyframes orb1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(70px, 50px) scale(1.08); }
+  66%       { transform: translate(-50px, 80px) scale(0.94); }
+}
+@keyframes orb2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(-90px, 40px) scale(1.06); }
+  70%       { transform: translate(50px, -60px) scale(0.96); }
+}
+@keyframes orb3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(-70px, -50px) scale(1.10); }
 }
 
 /* ── Hover & animations ───────────────────────────────────── */
