@@ -47,7 +47,7 @@ export default function HowWeWorkSection() {
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          STEPS.forEach((_, i) => setTimeout(() => setActive(i), i * 550));
+          STEPS.forEach((_, i) => setTimeout(() => setActive(i), i * 320));
           obs.disconnect();
         }
       },
@@ -87,7 +87,7 @@ export default function HowWeWorkSection() {
               height: '100%', width: `${lineW}%`,
               background: 'linear-gradient(90deg, rgb(99,102,241), rgb(130,60,245), rgb(217,70,239))',
               borderRadius: '2px',
-              transition: 'width 0.52s cubic-bezier(0.4, 0, 0.2, 1)',
+              transition: 'width 0.30s cubic-bezier(0.4, 0, 0.2, 1)',
             }} />
           </div>
 
@@ -177,7 +177,7 @@ export default function HowWeWorkSection() {
                   paddingTop: '10px',
                   opacity: on ? 1 : 0,
                   transform: on ? 'translateX(0)' : 'translateX(12px)',
-                  transition: `opacity 0.45s ease ${i * 550 + 150}ms, transform 0.45s ease ${i * 550 + 150}ms`,
+                  transition: `opacity 0.3s ease ${i * 320 + 100}ms, transform 0.3s ease ${i * 320 + 100}ms`,
                 }}>
                   <h3 style={{ margin: '0 0 4px', fontSize: '0.95rem', fontWeight: '700', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.01em', color: on ? 'var(--text)' : 'var(--text2)', transition: 'color 0.4s ease' }}>
                     {title}

@@ -35,7 +35,7 @@ const CLIENTS = [
     saved:     '20 hs / sem',
     reduction: '100% automatizado',
     quote:     'Antes vivía juntando datos de mil lados. Ahora abro el panel y está todo.',
-    author:    'Dr. Mayra Gonzales',
+    author:    'Dr. Mayra Gonzalez',
     accent:    'rgb(147,51,234)',
     preview:   'dashboard' as const,
   },
