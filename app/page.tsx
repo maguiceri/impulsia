@@ -107,43 +107,42 @@ export default function HeroPage() {
         </div>
       </section>
 
-      {/* Transformation strip */}
-      <div style={{
-        borderTop:    '1px solid rgba(0,0,0,0.08)',
+      {/* Ticker strip */}
+      <div className="ticker-wrapper" style={{
+        borderTop: '1px solid rgba(0,0,0,0.08)',
         borderBottom: '1px solid rgba(0,0,0,0.08)',
+        overflow: 'hidden',
+        padding: '18px 0',
       }}>
-        <div className="strip-grid" style={{
-          maxWidth: '900px', margin: '0 auto',
-          display: 'grid', gridTemplateColumns: '1fr 1fr 1fr',
-        }}>
-          {([
-            { problem: 'Tareas manuales',  solution: 'Automatizadas' },
-            { problem: 'Datos dispersos',  solution: 'Centralizados' },
-            { problem: 'Procesos lentos',  solution: 'En piloto automático' },
-          ] as const).map(({ problem, solution }, i) => (
-            <div key={problem} className="strip-item" style={{
-              padding: '28px 32px',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px',
-              borderRight: i < 2 ? '1px solid rgba(0,0,0,0.08)' : 'none',
-              textAlign: 'center',
-            }}>
-              <span style={{
-                fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase',
-                color: 'rgba(0,0,0,0.30)', fontFamily: 'var(--font-space-grotesk)',
-                textDecoration: 'line-through', textDecorationColor: 'rgba(0,0,0,0.18)',
-              }}>
-                {problem}
+        <div className="ticker-track" style={{ display: 'flex', width: 'max-content', alignItems: 'center', gap: '0' }}>
+          {[...Array(2)].flatMap(() =>
+            [
+              { problem: 'Tareas manuales',  solution: 'Automatizadas' },
+              { problem: 'Datos dispersos',  solution: 'Centralizados' },
+              { problem: 'Procesos lentos',  solution: 'En piloto automático' },
+              { problem: 'Errores humanos',  solution: 'Cero errores' },
+              { problem: 'Tiempo perdido',   solution: 'Horas recuperadas' },
+            ].map(({ problem, solution }, i) => (
+              <span key={`${problem}-${i}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '0 40px', whiteSpace: 'nowrap' }}>
+                <span style={{
+                  fontSize: '0.75rem', letterSpacing: '0.06em', textTransform: 'uppercase',
+                  color: 'rgba(0,0,0,0.28)', fontFamily: 'var(--font-space-grotesk)',
+                  textDecoration: 'line-through', textDecorationColor: 'rgba(0,0,0,0.15)',
+                }}>
+                  {problem}
+                </span>
+                <span style={{ color: 'rgba(0,0,0,0.18)', fontSize: '0.8rem' }}>→</span>
+                <span style={{
+                  fontSize: '0.82rem', fontWeight: '600', fontFamily: 'var(--font-space-grotesk)',
+                  background: 'linear-gradient(135deg, rgb(99,102,241), rgb(147,51,234) 55%, rgb(217,70,239))',
+                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+                }}>
+                  {solution}
+                </span>
+                <span style={{ color: 'rgba(0,0,0,0.12)', fontSize: '0.6rem', paddingLeft: '16px' }}>✦</span>
               </span>
-              <span style={{ color: 'rgba(0,0,0,0.22)', fontSize: '0.7rem', lineHeight: 1 }}>↓</span>
-              <span style={{
-                fontSize: '0.82rem', fontWeight: '700', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.01em',
-                background: 'linear-gradient(135deg, rgb(99,102,241), rgb(147,51,234) 55%, rgb(217,70,239))',
-                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-              }}>
-                {solution}
-              </span>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
 

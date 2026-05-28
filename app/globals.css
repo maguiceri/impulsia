@@ -30,6 +30,19 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── Ticker ───────────────────────────────────────────────── */
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-track {
+  animation: ticker 22s linear infinite;
+  will-change: transform;
+}
+.ticker-wrapper:hover .ticker-track {
+  animation-play-state: paused;
+}
+
 /* ── Responsive ───────────────────────────────────────────── */
 
 @media (max-width: 768px) {
