@@ -25,7 +25,7 @@ export default function Logo({ size = 'md', className = '' }: LogoProps) {
     >
       {/* Three chevrons above the text */}
       <svg
-        viewBox="-1 -1 68 22"
+        viewBox="-3 -3 72 26"
         style={{ display: 'block', height: '0.55em', width: 'auto' }}
         fill="none"
         strokeLinecap="round"
