@@ -23,7 +23,7 @@ export default function Footer() {
         {/* Logo + tagline */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
           <Logo size="sm" />
-          <p style={{ margin: 0, fontSize: '0.7rem', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.04em' }}>
+          <p style={{ margin: 0, fontSize: '0.65rem', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
             <span style={{ color: 'rgb(65,110,235)' }}>Automatización</span>
             <span style={{ color: 'rgba(0,0,0,0.25)', margin: '0 6px' }}>·</span>
             <span style={{ color: 'rgb(15,195,228)' }}>IA</span>
