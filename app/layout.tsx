@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import BackgroundOrbs from "./components/BackgroundOrbs";
+import ScrollToTop from "./components/ScrollToTop";
 
 const spaceGrotesk = Space_Grotesk({ variable: "--font-space-grotesk", subsets: ["latin"], weight: ["300","400","500","600","700"] });
 const geistMono    = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${spaceGrotesk.variable} ${geistMono.variable} ${orbitron.variable}`}>
       <body>
+        <ScrollToTop />
         <BackgroundOrbs />
         <Navbar />
         <main style={{ paddingTop: '64px', position: 'relative', zIndex: 1 }}>
