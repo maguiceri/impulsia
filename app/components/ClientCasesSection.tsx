@@ -88,34 +88,6 @@ function DashboardPreview({ accent }: { accent: string }) {
   );
 }
 
-function StepsPreview({ accent }: { accent: string }) {
-  const steps = [
-    { label: 'Form completado', done: true },
-    { label: 'Email bienvenida', done: true },
-    { label: 'Acceso creado',   done: true },
-    { label: 'Slack notificado', done: true },
-  ];
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-      {steps.map(({ label, done }) => (
-        <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{
-            width: '18px', height: '18px', borderRadius: '50%', flexShrink: 0,
-            background: done ? `${accent}30` : 'rgba(255,255,255,0.05)',
-            border: `1px solid ${done ? accent : 'rgba(255,255,255,0.10)'}`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '0.55rem', color: accent,
-          }}>
-            {done ? '✓' : ''}
-          </div>
-          <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-geist-mono)', color: done ? 'rgba(255,255,255,0.65)' : 'rgba(255,255,255,0.25)' }}>
-            {label}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-}
 
 /* ── Componente principal ────────────────────────────────────────── */
 function ClientCard({ client, visible }: { client: typeof CLIENTS[0]; visible: boolean }) {
@@ -240,7 +212,6 @@ function ClientCard({ client, visible }: { client: typeof CLIENTS[0]; visible: b
               <div style={{ padding: '16px' }}>
                 {preview === 'flow'      && <FlowPreview accent={accent} />}
                 {preview === 'dashboard' && <DashboardPreview accent={accent} />}
-                {preview === 'steps'     && <StepsPreview accent={accent} />}
               </div>
             </div>
           )}
