@@ -114,9 +114,6 @@ body {
   .hamburger        { display: flex !important; }
   .mobile-menu      { display: flex; }  /* controlled by JS */
 
-  .timeline-steps     { gap: 12px 4px !important; }
-  .timeline-steps h3  { font-size: 0.7rem !important; }
-  .timeline-steps p   { font-size: 0.68rem !important; }
 
   .card-main-grid   { grid-template-columns: 1fr !important; }
   .card-left        { border-right: none !important; border-bottom: 1px solid var(--border) !important; }
