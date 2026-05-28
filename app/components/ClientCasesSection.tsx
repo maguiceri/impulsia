@@ -107,10 +107,10 @@ function ClientCard({ client, visible }: { client: typeof CLIENTS[0]; visible: b
       <div style={{ height: '2px', background: `linear-gradient(90deg, ${accent}, transparent)` }} />
 
       {/* Main content */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0' }}>
+      <div className="card-main-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0' }}>
 
         {/* Left — client info */}
-        <div style={{ padding: '32px', borderRight: '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div className="card-left" style={{ padding: '32px', borderRight: '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             <div style={{
               width: '80px', height: '80px', borderRadius: '100%', flexShrink: 0,
@@ -219,7 +219,7 @@ function ClientCard({ client, visible }: { client: typeof CLIENTS[0]; visible: b
       </div>
 
       {/* Bottom — metrics + quote */}
-      <div style={{
+      <div className="card-bottom" style={{
         borderTop: '1px solid var(--border)',
         padding: '20px 32px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px',
@@ -268,7 +268,7 @@ export default function ClientCasesSection() {
   }, []);
 
   return (
-    <section ref={ref} style={{ padding: '88px 28px 100px', maxWidth: '1100px', margin: '0 auto', minHeight: '100vh' }}>
+    <section ref={ref} className="section-inner" style={{ padding: '88px 28px 100px', maxWidth: '1100px', margin: '0 auto', minHeight: '100vh' }}>
       <div style={{ marginBottom: '56px' }}>
         <p style={{ margin: '0 0 12px', fontSize: '0.65rem', letterSpacing: '0.14em', color: 'var(--text2)', textTransform: 'uppercase', fontFamily: 'var(--font-space-grotesk)' }}>
           Casos reales

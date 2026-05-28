@@ -18,32 +18,35 @@ export default function Navbar() {
       borderBottom: '1px solid rgba(0,0,0,0.08)',
     }}>
       <nav style={{
-        maxWidth: '1200px', margin: '0 auto', padding: '0 28px',
+        maxWidth: '1200px', margin: '0 auto', padding: '0 20px',
         height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <a href="#" style={{ textDecoration: 'none' }}>
           <Logo size="sm" />
         </a>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '36px' }}>
-          {LINKS.map(({ href, label }) => (
-            <a key={href} href={href} style={{
-              textDecoration: 'none',
-              fontSize: '0.875rem',
-              fontFamily: 'var(--font-space-grotesk)',
-              color: 'rgba(0,0,0,0.50)',
-              transition: 'color 0.15s',
-            }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'rgba(0,0,0,0.90)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(0,0,0,0.50)')}>
-              {label}
-            </a>
-          ))}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+          <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+            {LINKS.map(({ href, label }) => (
+              <a key={href} href={href} style={{
+                textDecoration: 'none',
+                fontSize: '0.875rem',
+                fontFamily: 'var(--font-space-grotesk)',
+                color: 'rgba(0,0,0,0.50)',
+                transition: 'color 0.15s',
+                whiteSpace: 'nowrap',
+              }}
+              onMouseEnter={e => (e.currentTarget.style.color = 'rgba(0,0,0,0.90)')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(0,0,0,0.50)')}>
+                {label}
+              </a>
+            ))}
+          </div>
 
           <a href="#contacto" style={{
             textDecoration: 'none',
             display: 'inline-flex', alignItems: 'center', gap: '6px',
-            padding: '8px 20px',
+            padding: '8px 18px',
             background: 'linear-gradient(135deg, rgb(99,102,241) 0%, rgb(147,51,234) 100%)',
             borderRadius: '8px',
             color: 'white',

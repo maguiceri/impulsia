@@ -32,7 +32,7 @@ export default function HeroPage() {
   return (
     <>
       {/* Hero */}
-      <section style={{
+      <section className="hero-section" style={{
         minHeight: 'calc(100vh - 64px)',
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
         padding: '80px 28px 100px',
@@ -112,7 +112,7 @@ export default function HeroPage() {
         borderTop:    '1px solid rgba(0,0,0,0.08)',
         borderBottom: '1px solid rgba(0,0,0,0.08)',
       }}>
-        <div style={{
+        <div className="strip-grid" style={{
           maxWidth: '900px', margin: '0 auto',
           display: 'grid', gridTemplateColumns: '1fr 1fr 1fr',
         }}>
@@ -121,7 +121,7 @@ export default function HeroPage() {
             { problem: 'Datos dispersos',  solution: 'Centralizados' },
             { problem: 'Procesos lentos',  solution: 'En piloto automático' },
           ] as const).map(({ problem, solution }, i) => (
-            <div key={problem} style={{
+            <div key={problem} className="strip-item" style={{
               padding: '28px 32px',
               display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px',
               borderRight: i < 2 ? '1px solid rgba(0,0,0,0.08)' : 'none',
@@ -149,7 +149,7 @@ export default function HeroPage() {
 
       {/* Services */}
       <section id="servicios" style={{ scrollMarginTop: '64px', minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
-      <div style={{ padding: '88px 28px 100px', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
+      <div className="section-inner" style={{ padding: '88px 28px 100px', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
         <div style={{ marginBottom: '56px' }}>
           <p style={{ margin: '0 0 12px', fontSize: '0.65rem', letterSpacing: '0.14em', color: 'var(--text2)', textTransform: 'uppercase', fontFamily: 'var(--font-space-grotesk)' }}>
             Qué hacemos
@@ -211,7 +211,7 @@ export default function HeroPage() {
         minHeight: '100vh',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
-        <div style={{
+        <div className="contacto-inner" style={{
           padding: '56px 48px',
           background: '#ffffff',
           border: '1px solid rgba(0,0,0,0.09)',

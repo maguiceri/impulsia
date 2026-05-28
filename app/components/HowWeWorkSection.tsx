@@ -54,7 +54,7 @@ export default function HowWeWorkSection() {
   const lineW = active <= 0 ? 0 : (active / (STEPS.length - 1)) * 100;
 
   return (
-    <section ref={ref} style={{ padding: '88px 28px 100px', maxWidth: '1100px', margin: '0 auto', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+    <section ref={ref} className="section-inner" style={{ padding: '88px 28px 100px', maxWidth: '1100px', margin: '0 auto', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
 
       <div style={{ marginBottom: '64px' }}>
         <p style={{ margin: '0 0 12px', fontSize: '0.65rem', letterSpacing: '0.14em', color: 'var(--text2)', textTransform: 'uppercase', fontFamily: 'var(--font-space-grotesk)' }}>
@@ -68,7 +68,7 @@ export default function HowWeWorkSection() {
 
       <div style={{ position: 'relative' }}>
 
-        <div style={{
+        <div className="timeline-aux" style={{
           position: 'absolute',
           top: '23px', left: '24px', right: '24px',
           height: '2px',
@@ -76,7 +76,7 @@ export default function HowWeWorkSection() {
           borderRadius: '2px',
         }} />
 
-        <div style={{
+        <div className="timeline-aux" style={{
           position: 'absolute',
           top: '23px', left: '24px',
           height: '2px',
@@ -87,7 +87,7 @@ export default function HowWeWorkSection() {
           transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
         }} />
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0' }}>
+        <div className="timeline-steps" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0' }}>
           {STEPS.map(({ n, title, desc, accent }, i) => {
             const on = active >= i;
             return (
