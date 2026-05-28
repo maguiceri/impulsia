@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Triangle Divider</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000; overflow-x: hidden; }
+
+    .section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font: 700 clamp(1.5rem, 4vw, 3rem) sans-serif;
+      letter-spacing: .1em;
+      color: #fff;
+    }
+    .section-top    { background: linear-gradient(to bottom, #04001a, #080010); }
+    .section-bottom { background: linear-gradient(to bottom, #000e1a, #00121a); }
+
+    #divider-wrap {
+      width: 100%;
+      height: 220px;   /* height of the triangle base — adjust freely */
+    }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+
+  <div class="section section-top">SECTION ONE</div>
+  <div id="divider-wrap"><canvas id="c"></canvas></div>
+  <div class="section section-bottom">SECTION TWO</div>
+
+  <script>
+    const wrap   = document.getElementById('divider-wrap');
+    const canvas = document.getElementById('c');
+    const ctx    = canvas.getContext('2d');
+
+    /* ── resize ────────────────────────────────────────────── */
+    function resize() {
+      canvas.width  = wrap.clientWidth;
+      canvas.height = wrap.clientHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    /* ── easing ─────────────────────────────────────────────  */
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+    /* ── glow stroke helper ─────────────────────────────────  */
+    function glowStroke(path, color, widths) {
+      // paint several layers from widest/faintest to thinnest/brightest
+      for (const [w, a] of widths) {
+        ctx.save();
+        ctx.strokeStyle = color.replace('A', a);
+        ctx.lineWidth   = w;
+        ctx.stroke(path);
+        ctx.restore();
+      }
+    }
+
+    /* ── main draw ──────────────────────────────────────────  */
+    function draw(progress) {
+      const W = canvas.width;
+      const H = canvas.height;
+
+      ctx.clearRect(0, 0, W, H);
+      if (progress <= 0) return;
+
+      ctx.lineCap  = 'round';
+      ctx.lineJoin = 'round';
+
+      const MIDPOINT   = 0.5;           // progress at which the line hits W/2
+      const APEX_FINAL = W * 0.92;      // final apex X position
+
+      /* ─── PHASE 1 (0 → 0.5): single line extends from left
+             centre toward the screen centre ──────────────── */
+      if (progress <= MIDPOINT) {
+        const p1   = easeOut(progress / MIDPOINT);  // 0 → 1
+        const endX = p1 * (W / 2);                   // from 0 to W/2
+
+        const path = new Path2D();
+        path.moveTo(0, H / 2);
+        path.lineTo(endX, H / 2);
+
+        glowStroke(path, 'rgba(0,220,255,A)', [
+          [20, 0.06],
+          [8,  0.18],
+          [3,  0.55],
+          [1,  1.00],
+        ]);
+
+      /* ─── PHASE 2 (0.5 → 1): the line "opens" into a triangle.
+             - apex continues toward APEX_FINAL
+             - the left end splits: top corner rises, bottom falls
+             - at progress=1 → full triangle (base left, apex right) ─ */
+      } else {
+        const p2 = easeOut((progress - MIDPOINT) / (1 - MIDPOINT)); // 0 → 1
+
+        // Apex: was at (W/2, H/2), travels to (APEX_FINAL, H/2)
+        const apexX = W / 2 + p2 * (APEX_FINAL - W / 2);
+        const apexY = H / 2;
+
+        // Top-left vertex: was at (W/2, H/2), moves to (0, 0)
+        const topX = (W / 2) * (1 - p2);
+        const topY = (H / 2) * (1 - p2);
+
+        // Bottom-left vertex: was at (W/2, H/2), moves to (0, H)
+        const botX = (W / 2) * (1 - p2);
+        const botY = H / 2 + (H / 2) * p2;
+
+        /* faint fill — user will style this */
+        const fill = new Path2D();
+        fill.moveTo(topX, topY);
+        fill.lineTo(apexX, apexY);
+        fill.lineTo(botX, botY);
+        fill.closePath();
+        ctx.fillStyle = `rgba(0,180,255,${0.04 * p2})`;
+        ctx.fill(fill);
+
+        /* triangle outline with glow */
+        const outline = new Path2D();
+        outline.moveTo(topX, topY);
+        outline.lineTo(apexX, apexY);
+        outline.lineTo(botX, botY);
+        outline.closePath();
+
+        glowStroke(outline, 'rgba(0,220,255,A)', [
+          [22, 0.05],
+          [10, 0.14],
+          [4,  0.45],
+          [1.5, 1.00],
+        ]);
+      }
+    }
+
+    /* ── scroll progress ────────────────────────────────────
+       0 when the divider centre is at the viewport bottom
+       1 when the divider centre is at the viewport top
+    ───────────────────────────────────────────────────────── */
+    function getProgress() {
+      const rect  = wrap.getBoundingClientRect();
+      const viewH = window.innerHeight;
+      const cy    = rect.top + rect.height / 2;   // divider centre Y
+      // map [viewH → 0] onto [0 → 1]
+      return Math.max(0, Math.min(1, 1 - cy / viewH));
+    }
+
+    /* ── RAF loop ───────────────────────────────────────────  */
+    (function tick() {
+      draw(getProgress());
+      requestAnimationFrame(tick);
+    })();
+  </script>
+</body>
+</html>
