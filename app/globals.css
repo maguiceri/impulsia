@@ -34,6 +34,8 @@ body {
 
 @media (max-width: 768px) {
   .nav-links        { display: none !important; }
+  .hamburger        { display: flex !important; }
+  .mobile-menu      { display: flex; }  /* controlled by JS */
 
   .timeline-aux     { display: none !important; }
   .timeline-steps   { grid-template-columns: repeat(2,1fr) !important; gap: 40px 24px !important; }
