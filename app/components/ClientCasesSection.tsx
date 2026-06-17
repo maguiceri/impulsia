@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 const CLIENTS = [
   {
@@ -121,7 +122,7 @@ function ClientCard({ client, visible }: { client: typeof CLIENTS[0]; visible: b
               fontFamily: 'var(--font-space-grotesk)', fontWeight: '700', fontSize: '1rem', color: accent,
             }}>
               {photo
-                ? <img src={photo} alt={company} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
+                ? <Image src={photo} alt={`Foto de perfil de ${company}`} width={80} height={80} style={{ objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
                 : initials}
             </div>
             <div>
