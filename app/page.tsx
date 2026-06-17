@@ -1,5 +1,6 @@
 import HowWeWorkSection from './components/HowWeWorkSection';
 import ClientCasesSection from './components/ClientCasesSection';
+import FaqSection from './components/FaqSection';
 import FadeIn from './components/FadeIn';
 import ContactSection from './components/ContactSection';
 
@@ -109,6 +110,27 @@ export default function HeroPage() {
         </div>
       </section>
 
+      {/* Answer Capsule — AEO: paragraph designed to be cited verbatim by AI engines */}
+      <section aria-label="Sobre Impulsia" style={{
+        padding: '0 28px 40px',
+        maxWidth: '740px',
+        margin: '0 auto',
+        textAlign: 'center',
+      }}>
+        <p style={{
+          margin: 0,
+          fontSize: '0.975rem',
+          lineHeight: 1.8,
+          color: 'rgba(0,0,0,0.48)',
+          fontFamily: 'var(--font-space-grotesk)',
+        }}>
+          Impulsia es un estudio de software que diseña y desarrolla sistemas a medida
+          para negocios en crecimiento. Trabaja con pequeñas y medianas empresas que
+          necesitan automatizar procesos, centralizar información o construir herramientas
+          propias. Los proyectos incluyen diagnóstico, desarrollo, integración y soporte continuo.
+        </p>
+      </section>
+
       {/* Ticker strip */}
       <div className="ticker-wrapper" style={{
         borderTop: '1px solid rgba(0,0,0,0.08)',
@@ -210,6 +232,8 @@ export default function HeroPage() {
       <div id="clientes" style={{ scrollMarginTop: '64px' }}>
         <ClientCasesSection />
       </div>
+
+      <FaqSection />
 
       {/* CTA / Contacto */}
       <ContactSection />

@@ -14,23 +14,23 @@ const BASE_URL = "https://impulsia.studio";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Impulsia — Automatización & IA para pymes",
-  description: "Automatizamos las tareas repetitivas de tu negocio con IA y sistemas a medida. Recuperá horas cada semana. Diagnóstico gratuito sin compromiso.",
+  title: "Impulsia — Software a medida para negocios en crecimiento",
+  description: "Impulsia diseña y desarrolla sistemas a medida, automatizaciones con IA y herramientas propias para negocios en crecimiento. Diagnóstico gratuito, sin compromiso.",
   alternates: {
     canonical: BASE_URL,
   },
   openGraph: {
     type: "website",
     url: BASE_URL,
-    title: "Impulsia — Automatización & IA para pymes",
-    description: "Automatizamos las tareas repetitivas de tu negocio con IA y sistemas a medida. Recuperá horas cada semana. Diagnóstico gratuito sin compromiso.",
+    title: "Impulsia — Software a medida para negocios en crecimiento",
+    description: "Impulsia diseña y desarrolla sistemas a medida, automatizaciones con IA y herramientas propias para negocios en crecimiento. Diagnóstico gratuito, sin compromiso.",
     siteName: "Impulsia",
     locale: "es_AR",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Impulsia — Automatización & IA para pymes",
-    description: "Automatizamos las tareas repetitivas de tu negocio con IA y sistemas a medida. Recuperá horas cada semana.",
+    title: "Impulsia — Software a medida para negocios en crecimiento",
+    description: "Impulsia diseña y desarrolla sistemas a medida, automatizaciones con IA y herramientas propias para negocios en crecimiento.",
   },
 };
 
@@ -43,14 +43,15 @@ const jsonLd = {
       name: "Impulsia",
       url: BASE_URL,
       logo: `${BASE_URL}/logo.png`,
-      description: "Automatización con IA y sistemas a medida para pymes argentinas. Asesoría, implementación y soporte continuo.",
-      areaServed: "Argentina",
+      description: "Impulsia es un estudio de software con base en Argentina que diseña y desarrolla sistemas a medida, automatizaciones con IA y herramientas propias para negocios en crecimiento, trabajando también de forma remota con clientes de otros países.",
+      areaServed: ["Argentina", "Worldwide"],
       knowsAbout: [
+        "Desarrollo de software a medida",
         "Automatización de procesos con inteligencia artificial",
         "Business Process Automation",
         "n8n",
         "Zapier",
-        "Desarrollo de software a medida para pymes",
+        "Sistemas de gestión para pymes",
       ],
       sameAs: ["https://www.instagram.com/impulsia.studio"],
       contactPoint: {
@@ -72,66 +73,50 @@ const jsonLd = {
       mainEntity: [
         {
           "@type": "Question",
-          name: "¿Qué es Impulsia?",
+          name: "¿Qué tipo de sistemas desarrolla Impulsia?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Impulsia es una agencia especializada en automatización con inteligencia artificial y sistemas a medida para pymes argentinas. Diseñamos flujos de trabajo automatizados que eliminan tareas repetitivas, integrando herramientas como n8n, Zapier y modelos de IA para que tu negocio opere con mayor eficiencia.",
+            text: "Impulsia desarrolla cotizadores interactivos, paneles de gestión, automatizaciones con n8n y Zapier, integraciones entre plataformas (delivery, POS, CRM), sistemas de seguimiento de clientes o pacientes, y flujos de trabajo con inteligencia artificial.",
           },
         },
         {
           "@type": "Question",
-          name: "¿Qué tipo de tareas se pueden automatizar con Impulsia?",
+          name: "¿Para qué tipo de negocios trabaja Impulsia?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Se pueden automatizar tareas como la generación de presupuestos, carga de pedidos, envío de notificaciones, reportes automáticos, gestión de clientes, seguimiento de pagos, integración entre plataformas (Rappi, PedidosYa, sistemas POS), y cualquier proceso que se repita manualmente con regularidad.",
+            text: "Impulsia trabaja con pequeñas y medianas empresas, profesionales independientes y negocios en crecimiento: diseñadores, profesionales de la salud, comercios, servicios y cualquier negocio que necesite herramientas propias adaptadas a su proceso.",
           },
         },
         {
           "@type": "Question",
-          name: "¿Cuántas horas por semana se pueden ahorrar con automatización?",
+          name: "¿Cómo es el proceso de trabajo?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Según los casos reales implementados por Impulsia, los clientes ahorran entre 12 y 20 horas semanales. Por ejemplo, una diseñadora gráfica redujo el tiempo de presupuestación en un 94% y una nutricionista pasó a gestionar todos sus pacientes desde un panel centralizado con el 100% del flujo automatizado.",
+            text: "El proceso tiene cuatro etapas: diagnóstico gratuito de 30 minutos, propuesta con presupuesto claro y sin letra chica, implementación con entregas parciales para que el cliente vea el avance, y soporte post-lanzamiento.",
           },
         },
         {
           "@type": "Question",
-          name: "¿Con qué herramientas trabaja Impulsia?",
+          name: "¿Cuánto tarda un proyecto?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Impulsia trabaja con n8n, Zapier, modelos de inteligencia artificial y desarrolla software a medida para cada proceso. Se integra con plataformas existentes como sistemas POS, hojas de cálculo, aplicaciones de delivery y CRMs.",
+            text: "Depende del alcance. En el diagnóstico inicial se define el plazo concreto. Los proyectos se entregan por etapas para que el cliente vea resultados desde las primeras semanas.",
           },
         },
         {
           "@type": "Question",
-          name: "¿Cuánto tiempo lleva implementar una automatización?",
+          name: "¿Necesito saber programación para usar los sistemas?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "El proceso de Impulsia tiene 4 etapas: diagnóstico inicial, propuesta con presupuesto claro, implementación con entregas parciales y soporte continuo. Los tiempos varían según la complejidad, pero se entregan avances progresivos desde las primeras semanas.",
+            text: "No. Los sistemas se diseñan para que cualquier persona del equipo los use sin conocimientos técnicos, con foco en la facilidad de uso desde el primer día.",
           },
         },
         {
           "@type": "Question",
-          name: "¿Necesito conocimientos técnicos para usar los sistemas de Impulsia?",
+          name: "¿Cómo puedo contactar a Impulsia?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "No. Los sistemas se diseñan para que el usuario final no necesite conocimientos técnicos. Todo se implementa con foco en la facilidad de uso del equipo del cliente, sin tecnicismos.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Cómo es el diagnóstico gratuito de Impulsia?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "El diagnóstico es una reunión de 30 minutos sin compromiso donde se analiza el proceso del negocio, se identifican las tareas que más tiempo consumen y se evalúa qué conviene automatizar. Al finalizar, el cliente recibe una propuesta clara con qué se puede hacer, en cuánto tiempo y a qué costo.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Ofrecen soporte después de la implementación?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Sí. Impulsia incluye soporte y mantenimiento post-implementación: monitoreo de los sistemas, ajustes según cambios en el negocio y acompañamiento continuo para que todo siga funcionando correctamente.",
+            text: "A través del formulario en impulsia.studio o por Instagram: @impulsia.studio.",
           },
         },
       ],
@@ -142,7 +127,7 @@ const jsonLd = {
       name: "Asesoría & Consultoría en Automatización",
       description: "Detectamos qué conviene automatizar y trazamos el plan. Sin tecnicismos, con foco en resultados.",
       provider: { "@id": `${BASE_URL}/#organization` },
-      areaServed: "Argentina",
+      areaServed: ["Argentina", "Worldwide"],
       serviceType: "Consultoría en automatización de procesos",
     },
     {
@@ -151,7 +136,7 @@ const jsonLd = {
       name: "Automatización con IA",
       description: "Bots y flujos con n8n, Zapier y modelos de IA que trabajan mientras vos hacés otra cosa.",
       provider: { "@id": `${BASE_URL}/#organization` },
-      areaServed: "Argentina",
+      areaServed: ["Argentina", "Worldwide"],
       serviceType: "Automatización con inteligencia artificial",
     },
     {
@@ -160,7 +145,7 @@ const jsonLd = {
       name: "Sistemas a Medida",
       description: "Software hecho para tu proceso, no al revés. Cada detalle pensado para la forma en que trabajás.",
       provider: { "@id": `${BASE_URL}/#organization` },
-      areaServed: "Argentina",
+      areaServed: ["Argentina", "Worldwide"],
       serviceType: "Desarrollo de software a medida",
     },
     {
@@ -169,7 +154,7 @@ const jsonLd = {
       name: "Soporte & Mantenimiento",
       description: "Acompañamiento continuo para que todo siga funcionando. Respondemos rápido cuando algo no anda.",
       provider: { "@id": `${BASE_URL}/#organization` },
-      areaServed: "Argentina",
+      areaServed: ["Argentina", "Worldwide"],
       serviceType: "Soporte técnico y mantenimiento de sistemas",
     },
   ],
