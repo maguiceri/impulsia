@@ -9,9 +9,9 @@ const LINKS = [
 
 export default function Footer() {
   return (
-    <footer style={{
-      borderTop: '1px solid rgba(0,0,0,0.08)',
-      background: 'var(--bg)',
+    <footer className="glass-card" style={{
+      borderRadius: 0,
+      borderLeft: 'none', borderRight: 'none', borderBottom: 'none',
       position: 'relative', zIndex: 1,
     }}>
       <div className="footer-inner" style={{

@@ -7,25 +7,25 @@ const STEPS = [
     n: '01',
     title: 'Diagnóstico',
     desc: 'Entendemos tu proceso y detectamos dónde está el mayor desperdicio de tiempo.',
-    accent: 'rgb(99,102,241)',
+    accent: 'rgb(65,110,235)',
   },
   {
     n: '02',
     title: 'Presupuesto',
     desc: 'Propuesta clara: qué hacemos, en cuánto tiempo y a qué costo. Sin letra chica.',
-    accent: 'rgb(130,60,245)',
+    accent: 'rgb(15,195,228)',
   },
   {
     n: '03',
     title: 'Implementación',
     desc: 'Construimos e integramos con entregas parciales para que veas el avance.',
-    accent: 'rgb(147,51,234)',
+    accent: 'rgb(130,55,230)',
   },
   {
     n: '04',
     title: 'Soporte',
     desc: 'Monitoreamos, ajustamos y acompañamos para que todo siga funcionando.',
-    accent: 'rgb(217,70,239)',
+    accent: 'rgb(15,195,228)',
   },
 ];
 
@@ -65,8 +65,8 @@ export default function HowWeWorkSection() {
       minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center',
     }}>
 
-      <div style={{ marginBottom: '64px' }}>
-        <p style={{ margin: '0 0 12px', fontSize: '0.65rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontFamily: 'var(--font-space-grotesk)', fontWeight: '600', background: 'linear-gradient(135deg, rgb(99,102,241), rgb(217,70,239))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+      <div className="glass-card" style={{ marginBottom: '64px', padding: '32px 36px', borderRadius: '16px' }}>
+        <p style={{ margin: '0 0 12px', fontSize: '0.65rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontFamily: 'var(--font-space-grotesk)', fontWeight: '600', background: 'linear-gradient(135deg, rgb(65,110,235), rgb(15,195,228))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
           Cómo trabajamos
         </p>
         <h2 style={{ margin: 0, fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: '700', lineHeight: 1.2, letterSpacing: '-0.01em', fontFamily: 'var(--font-space-grotesk)' }}>
@@ -80,14 +80,15 @@ export default function HowWeWorkSection() {
         <div style={{ position: 'relative' }}>
           <div style={{
             position: 'absolute', top: '23px', left: '24px', right: '24px',
-            height: '2px', background: 'rgba(0,0,0,0.10)', borderRadius: '2px',
+            height: '2px', background: 'rgba(65,110,235,0.12)', borderRadius: '2px',
             overflow: 'hidden',
           }}>
             <div style={{
               height: '100%', width: `${lineW}%`,
-              background: 'linear-gradient(90deg, rgb(99,102,241), rgb(130,60,245), rgb(217,70,239))',
+              background: 'linear-gradient(90deg, rgb(65,110,235), rgb(15,195,228) 50%, rgb(130,55,230))',
               borderRadius: '2px',
-              transition: 'width 0.30s cubic-bezier(0.4, 0, 0.2, 1)',
+              transition: 'width 0.7s cubic-bezier(0.16, 1, 0.3, 1)',
+              boxShadow: '0 0 8px rgba(65,110,235,0.35)',
             }} />
           </div>
 
@@ -99,13 +100,13 @@ export default function HowWeWorkSection() {
                   display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px',
                   padding: '0 12px',
                   opacity: on ? 1 : 0,
-                  transform: on ? 'translateY(0)' : 'translateY(18px)',
-                  transition: 'opacity 0.45s ease, transform 0.45s ease',
+                  transform: on ? 'translateY(0) scale(1)' : 'translateY(24px) scale(0.95)',
+                  transition: `opacity 0.55s cubic-bezier(0.22,1,0.36,1) ${i * 80}ms, transform 0.55s cubic-bezier(0.22,1,0.36,1) ${i * 80}ms`,
                 }}>
                   <div className="step-node" style={{
                     width: '48px', height: '48px', borderRadius: '50%', flexShrink: 0,
-                    background: on ? `linear-gradient(135deg, rgb(99,102,241) ${i * 30}%, ${accent})` : 'var(--surface2)',
-                    border: on ? 'none' : '1px solid rgba(0,0,0,0.10)',
+                    background: on ? `linear-gradient(135deg, rgb(65,110,235) ${i * 30}%, ${accent})` : 'var(--surface2)',
+                    border: on ? 'none' : '1px solid rgba(65,110,235,0.15)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontSize: '0.7rem', fontFamily: 'var(--font-space-grotesk)', fontWeight: '700',
                     color: on ? 'white' : 'var(--text2)',
@@ -115,7 +116,7 @@ export default function HowWeWorkSection() {
                   }}>
                     {n}
                   </div>
-                  <div style={{ textAlign: 'center' }}>
+                  <div className="glass-card" style={{ textAlign: 'center', padding: '16px 18px', borderRadius: '12px', width: '100%' }}>
                     <h3 style={{ margin: '0 0 8px', fontSize: '0.82rem', fontWeight: '700', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.02em', color: on ? 'var(--text)' : 'var(--text2)', transition: 'color 0.4s ease' }}>
                       {title}
                     </h3>
@@ -144,8 +145,8 @@ export default function HowWeWorkSection() {
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0 }}>
                   <div style={{
                     width: '44px', height: '44px', borderRadius: '50%',
-                    background: on ? `linear-gradient(135deg, rgb(99,102,241) ${i * 30}%, ${accent})` : 'var(--surface2)',
-                    border: on ? 'none' : '1px solid rgba(0,0,0,0.10)',
+                    background: on ? `linear-gradient(135deg, rgb(65,110,235) ${i * 30}%, ${accent})` : 'var(--surface2)',
+                    border: on ? 'none' : '1px solid rgba(65,110,235,0.15)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontSize: '0.68rem', fontFamily: 'var(--font-space-grotesk)', fontWeight: '700',
                     color: on ? 'white' : 'var(--text2)',
@@ -160,7 +161,7 @@ export default function HowWeWorkSection() {
                   </div>
 
                   {!isLast && (
-                    <div style={{ width: '2px', flex: 1, minHeight: '48px', background: 'rgba(0,0,0,0.08)', borderRadius: '2px', overflow: 'hidden', margin: '4px 0' }}>
+                    <div style={{ width: '2px', flex: 1, minHeight: '48px', background: 'rgba(65,110,235,0.10)', borderRadius: '2px', overflow: 'hidden', margin: '4px 0' }}>
                       <div style={{
                         width: '100%',
                         height: lineOn ? '100%' : '0%',
@@ -172,9 +173,12 @@ export default function HowWeWorkSection() {
                 </div>
 
                 {/* Text */}
-                <div style={{
-                  paddingBottom: isLast ? '0' : '20px',
-                  paddingTop: '10px',
+                <div className="glass-card" style={{
+                  flex: 1,
+                  padding: '14px 18px',
+                  borderRadius: '12px',
+                  marginBottom: isLast ? '0' : '8px',
+                  marginTop: '2px',
                   opacity: on ? 1 : 0,
                   transform: on ? 'translateX(0)' : 'translateX(12px)',
                   transition: `opacity 0.3s ease ${i * 320 + 100}ms, transform 0.3s ease ${i * 320 + 100}ms`,

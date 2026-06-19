@@ -46,10 +46,8 @@ export default function ContactSection() {
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       padding: '80px 20px',
     }}>
-      <div className="contact-grid" style={{
+      <div className="contact-grid glass-card" style={{
         width: '100%', maxWidth: '960px',
-        background: '#ffffff',
-        border: '1px solid rgba(0,0,0,0.09)',
         borderRadius: '24px',
         overflow: 'hidden',
         display: 'grid', gridTemplateColumns: '1fr 1fr',
@@ -58,17 +56,17 @@ export default function ContactSection() {
         {/* Left — copy */}
         <div className="contact-left" style={{
           padding: '56px 48px',
-          background: 'linear-gradient(145deg, rgba(99,102,241,0.06) 0%, rgba(217,70,239,0.05) 100%)',
-          borderRight: '1px solid rgba(0,0,0,0.08)',
+          background: 'linear-gradient(145deg, rgba(65,110,235,0.06) 0%, rgba(15,195,228,0.04) 100%)',
+          borderRight: '1px solid rgba(65,110,235,0.12)',
           display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '24px',
         }}>
           <div>
-            <p style={{ margin: '0 0 12px', fontSize: '0.65rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontFamily: 'var(--font-space-grotesk)', fontWeight: '600', background: 'linear-gradient(135deg, rgb(99,102,241), rgb(217,70,239))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            <p style={{ margin: '0 0 12px', fontSize: '0.65rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontFamily: 'var(--font-space-grotesk)', fontWeight: '600', background: 'linear-gradient(135deg, rgb(65,110,235), rgb(15,195,228))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               Contacto
             </p>
             <h2 style={{ margin: 0, fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', fontWeight: '700', lineHeight: 1.15, letterSpacing: '-0.02em', fontFamily: 'var(--font-space-grotesk)' }}>
               Impulsemos{' '}
-              <span style={{ background: 'linear-gradient(135deg, rgb(99,102,241), rgb(147,51,234) 50%, rgb(217,70,239))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              <span style={{ background: 'linear-gradient(135deg, rgb(65,110,235), rgb(130,55,230) 50%, rgb(15,195,228))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                 tu negocio
               </span>
             </h2>
@@ -116,7 +114,7 @@ export default function ContactSection() {
                   type="text" required placeholder="Tu nombre"
                   value={form.name} onChange={set('name')}
                   style={inputStyle}
-                  onFocus={e => e.currentTarget.style.borderColor = 'rgb(99,102,241)'}
+                  onFocus={e => e.currentTarget.style.borderColor = 'rgb(65,110,235)'}
                   onBlur={e => e.currentTarget.style.borderColor = 'rgba(0,0,0,0.12)'}
                 />
               </div>
@@ -127,7 +125,7 @@ export default function ContactSection() {
                   type="email" required placeholder="tu@email.com"
                   value={form.email} onChange={set('email')}
                   style={inputStyle}
-                  onFocus={e => e.currentTarget.style.borderColor = 'rgb(99,102,241)'}
+                  onFocus={e => e.currentTarget.style.borderColor = 'rgb(65,110,235)'}
                   onBlur={e => e.currentTarget.style.borderColor = 'rgba(0,0,0,0.12)'}
                 />
               </div>
@@ -138,7 +136,7 @@ export default function ContactSection() {
                   required placeholder="Contanos qué proceso querés automatizar..."
                   rows={4} value={form.message} onChange={set('message')}
                   style={{ ...inputStyle, resize: 'vertical', minHeight: '110px' }}
-                  onFocus={e => e.currentTarget.style.borderColor = 'rgb(99,102,241)'}
+                  onFocus={e => e.currentTarget.style.borderColor = 'rgb(65,110,235)'}
                   onBlur={e => e.currentTarget.style.borderColor = 'rgba(0,0,0,0.12)'}
                 />
               </div>
@@ -174,8 +172,8 @@ export default function ContactSection() {
               <button type="submit" disabled={status === 'loading'} className="cta-btn" style={{
                 padding: '13px',
                 background: status === 'loading'
-                  ? 'rgba(99,102,241,0.5)'
-                  : 'linear-gradient(135deg, rgb(99,102,241), rgb(147,51,234))',
+                  ? 'rgba(65,110,235,0.5)'
+                  : 'linear-gradient(135deg, rgb(65,110,235), rgb(130,55,230))',
                 border: 'none', borderRadius: '10px',
                 color: 'white', fontSize: '0.92rem',
                 fontFamily: 'var(--font-space-grotesk)', fontWeight: '600',

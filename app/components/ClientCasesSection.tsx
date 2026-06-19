@@ -18,7 +18,7 @@ const CLIENTS = [
     reduction: '−94% errores',
     quote:     'Dejé de perder horas presupuestando. Ahora el cliente lo arma solo y yo avanzo con lo mío.',
     author:    'Dagos Studio',
-    accent:    'rgb(99,102,241)',
+    accent:    'rgb(65,110,235)',
     video:     '/web-mar.mp4',
     preview:   'flow' as const,
   },
@@ -37,7 +37,7 @@ const CLIENTS = [
     reduction: '100% automatizado',
     quote:     'Antes vivía juntando datos de mil lados. Ahora abro el panel y está todo.',
     author:    'Dr. Mayra Gonzalez',
-    accent:    'rgb(147,51,234)',
+    accent:    'rgb(130,55,230)',
     preview:   'dashboard' as const,
   },
 ];
@@ -93,17 +93,40 @@ function DashboardPreview({ accent }: { accent: string }) {
 /* ── Componente principal ────────────────────────────────────────── */
 function ClientCard({ client, visible }: { client: typeof CLIENTS[0]; visible: boolean }) {
   const { photo, initials, company, sector, linkedin, web, instagram, need, solution, saved, reduction, quote, author, accent, video, preview } = client;
+  const ref = useRef<HTMLDivElement>(null);
+
+  function onMove(e: React.MouseEvent<HTMLDivElement>) {
+    const el = ref.current;
+    if (!el) return;
+    const { left, top, width, height } = el.getBoundingClientRect();
+    const x = (e.clientX - left) / width  - 0.5;
+    const y = (e.clientY - top)  / height - 0.5;
+    el.style.transform   = `perspective(1200px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateY(0) scale(1.01)`;
+    el.style.boxShadow   = `${-x * 20}px ${-y * 20}px 60px rgba(65,110,235,0.09), 0 24px 64px rgba(0,0,0,0.08)`;
+  }
+
+  function onLeave() {
+    const el = ref.current;
+    if (!el) return;
+    el.style.transform = '';
+    el.style.boxShadow = '';
+  }
 
   return (
-    <div className="client-card" style={{
-      background: 'var(--surface)',
-      border: '1px solid var(--border)',
-      borderRadius: '20px',
-      overflow: 'hidden',
-      opacity: visible ? 1 : 0,
-      transform: visible ? 'translateY(0)' : 'translateY(32px)',
-      transition: 'opacity 0.55s ease, transform 0.55s ease',
-    }}>
+    <div
+      ref={ref}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      className="client-card glass-card"
+      style={{
+        borderRadius: '20px',
+        overflow: 'hidden',
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(32px)',
+        transition: 'opacity 0.55s ease, transform 0.55s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease',
+        willChange: 'transform',
+      }}
+    >
       {/* Top accent */}
       <div style={{ height: '2px', background: `linear-gradient(90deg, ${accent}, transparent)` }} />
 
@@ -111,7 +134,7 @@ function ClientCard({ client, visible }: { client: typeof CLIENTS[0]; visible: b
       <div className="card-main-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0' }}>
 
         {/* Left — client info */}
-        <div className="card-left" style={{ padding: '32px', borderRight: '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div className="card-left" style={{ padding: '32px', borderRight: '1px solid rgba(99,102,241,0.12)', display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             <div style={{
               width: '80px', height: '80px', borderRadius: '100%', flexShrink: 0,
@@ -188,7 +211,7 @@ function ClientCard({ client, visible }: { client: typeof CLIENTS[0]; visible: b
             Lo que armamos
           </p>
           {video ? (
-            <div style={{ borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--border)' }}>
+            <div style={{ borderRadius: '10px', overflow: 'hidden', border: '1px solid rgba(99,102,241,0.12)' }}>
               <video
                 src={video}
                 autoPlay
@@ -221,19 +244,19 @@ function ClientCard({ client, visible }: { client: typeof CLIENTS[0]; visible: b
 
       {/* Bottom — metrics + quote */}
       <div className="card-bottom" style={{
-        borderTop: '1px solid var(--border)',
+        borderTop: '1px solid rgba(99,102,241,0.12)',
         padding: '20px 32px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px',
       }}>
         <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
           <div>
-            <p style={{ margin: 0, fontSize: '1rem', fontWeight: '700', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.02em', background: `linear-gradient(135deg, ${accent}, rgb(217,70,239))`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            <p style={{ margin: 0, fontSize: '1rem', fontWeight: '700', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.02em', background: `linear-gradient(135deg, ${accent}, rgb(15,195,228))`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               {saved}
             </p>
             <p style={{ margin: 0, fontSize: '0.65rem', color: 'var(--text2)', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.06em' }}>ahorradas</p>
           </div>
           <div>
-            <p style={{ margin: 0, fontSize: '1rem', fontWeight: '700', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.02em', background: `linear-gradient(135deg, ${accent}, rgb(217,70,239))`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            <p style={{ margin: 0, fontSize: '1rem', fontWeight: '700', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.02em', background: `linear-gradient(135deg, ${accent}, rgb(15,195,228))`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               {reduction}
             </p>
             <p style={{ margin: 0, fontSize: '0.65rem', color: 'var(--text2)', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.06em' }}>en errores</p>
@@ -270,8 +293,8 @@ export default function ClientCasesSection() {
 
   return (
     <section ref={ref} className="section-inner" style={{ padding: '88px 28px 100px', maxWidth: '1100px', margin: '0 auto', minHeight: '100vh' }}>
-      <div style={{ marginBottom: '56px' }}>
-        <p style={{ margin: '0 0 12px', fontSize: '0.65rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontFamily: 'var(--font-space-grotesk)', fontWeight: '600', background: 'linear-gradient(135deg, rgb(99,102,241), rgb(217,70,239))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+      <div className="glass-card" style={{ marginBottom: '56px', padding: '32px 36px', borderRadius: '16px' }}>
+        <p style={{ margin: '0 0 12px', fontSize: '0.65rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontFamily: 'var(--font-space-grotesk)', fontWeight: '600', background: 'linear-gradient(135deg, rgb(65,110,235), rgb(15,195,228))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
           Casos reales
         </p>
         <h2 style={{ margin: 0, fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: '700', lineHeight: 1.2, letterSpacing: '-0.01em', fontFamily: 'var(--font-space-grotesk)' }}>

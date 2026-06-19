@@ -14,7 +14,7 @@ export default function Logo({ size = 'md', className = '' }: LogoProps) {
         display: 'inline-flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: '0.28em',
+        gap: '0.16em',
         fontFamily: 'var(--font-orbitron)',
         fontSize: fs,
         letterSpacing: '0.35em',
@@ -25,8 +25,8 @@ export default function Logo({ size = 'md', className = '' }: LogoProps) {
     >
       {/* Three chevrons above the text */}
       <svg
-        viewBox="-3 -3 72 26"
-        style={{ display: 'block', height: '0.55em', width: 'auto' }}
+        viewBox="-3 -1.5 72 23"
+        style={{ display: 'block', height: '0.52em', width: 'auto' }}
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"

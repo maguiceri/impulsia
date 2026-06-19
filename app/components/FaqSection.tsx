@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useState, useCallback } from 'react';
 import FadeIn from './FadeIn';
 
 const FAQS = [
@@ -27,7 +30,32 @@ const FAQS = [
   },
 ];
 
+const N = FAQS.length;
+const INTERVAL = 4200;
+
+function mod(n: number, m: number) { return ((n % m) + m) % m; }
+
 export default function FaqSection() {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const next = useCallback(() => setActive(a => mod(a + 1, N)), []);
+
+  const go = useCallback((i: number) => {
+    setActive(i);
+    setPaused(true);
+    setTimeout(() => setPaused(false), 7000);
+  }, []);
+
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(next, INTERVAL);
+    return () => clearInterval(id);
+  }, [paused, next]);
+
+  const prev = mod(active - 1, N);
+  const nextIdx = mod(active + 1, N);
+
   return (
     <section
       id="faq"
@@ -39,7 +67,7 @@ export default function FaqSection() {
       }}
     >
       <FadeIn>
-        <div style={{ marginBottom: '56px' }}>
+        <div className="glass-card" style={{ marginBottom: '64px', padding: '32px 36px', borderRadius: '16px' }}>
           <p style={{
             margin: '0 0 12px',
             fontSize: '0.65rem',
@@ -47,7 +75,7 @@ export default function FaqSection() {
             textTransform: 'uppercase',
             fontFamily: 'var(--font-space-grotesk)',
             fontWeight: '600',
-            background: 'linear-gradient(135deg, rgb(99,102,241), rgb(217,70,239))',
+            background: 'linear-gradient(135deg, rgb(65,110,235), rgb(15,195,228))',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
@@ -68,44 +96,148 @@ export default function FaqSection() {
         </div>
       </FadeIn>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(460px, 1fr))',
-        gap: '2px',
-      }}>
-        {FAQS.map(({ q, a }, i) => (
-          <FadeIn key={q} delay={i * 60}>
-            <div style={{
-              padding: '28px 32px',
-              background: 'var(--surface)',
-              border: '1px solid var(--border)',
-              borderRadius: '14px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '10px',
+      {/* Carousel — 3 visible: prev · active · next */}
+      <div
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1.7fr 1fr',
+          gap: '16px',
+          alignItems: 'start',
+        }}>
+          {/* Prev */}
+          <div
+            onClick={() => go(prev)}
+            className="glass-card"
+            style={{
+              padding: '24px 26px',
+              borderRadius: '16px',
+              cursor: 'pointer',
+              opacity: 0.55,
+              transform: 'scale(0.96) translateX(12px)',
+              transition: 'opacity 0.45s ease, transform 0.45s cubic-bezier(0.22,1,0.36,1)',
+            }}
+          >
+            <p style={{
+              margin: '0 0 8px',
+              fontSize: '0.62rem',
+              letterSpacing: '0.10em',
+              textTransform: 'uppercase',
+              color: 'var(--text2)',
+              fontFamily: 'var(--font-space-grotesk)',
             }}>
-              <h3 style={{
-                margin: 0,
-                fontSize: '0.9rem',
-                fontWeight: '700',
-                fontFamily: 'var(--font-space-grotesk)',
-                lineHeight: 1.35,
-                letterSpacing: '-0.01em',
-              }}>
-                {q}
-              </h3>
-              <p style={{
-                margin: 0,
-                fontSize: '0.875rem',
-                color: 'var(--text2)',
-                lineHeight: 1.7,
-                fontFamily: 'var(--font-space-grotesk)',
-              }}>
-                {a}
-              </p>
-            </div>
-          </FadeIn>
-        ))}
+              ← anterior
+            </p>
+            <h3 style={{
+              margin: 0,
+              fontSize: '0.82rem',
+              fontWeight: '600',
+              fontFamily: 'var(--font-space-grotesk)',
+              lineHeight: 1.35,
+              color: 'var(--text2)',
+            }}>
+              {FAQS[prev].q}
+            </h3>
+          </div>
+
+          {/* Active */}
+          <div
+            className="glass-card"
+            style={{
+              padding: '36px 40px',
+              borderRadius: '20px',
+              border: '1px solid rgba(65,110,235,0.28)',
+              boxShadow: '0 4px 0 rgba(65,110,235,0.10), 0 24px 64px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.95)',
+              transform: 'scale(1)',
+              transition: 'transform 0.45s cubic-bezier(0.22,1,0.36,1)',
+            }}
+          >
+            <h3 style={{
+              margin: '0 0 16px',
+              fontSize: '1rem',
+              fontWeight: '700',
+              fontFamily: 'var(--font-space-grotesk)',
+              lineHeight: 1.3,
+              letterSpacing: '-0.01em',
+            }}>
+              {FAQS[active].q}
+            </h3>
+            <p style={{
+              margin: 0,
+              fontSize: '0.9rem',
+              color: 'var(--text2)',
+              lineHeight: 1.75,
+              fontFamily: 'var(--font-space-grotesk)',
+            }}>
+              {FAQS[active].a}
+            </p>
+          </div>
+
+          {/* Next */}
+          <div
+            onClick={() => go(nextIdx)}
+            className="glass-card"
+            style={{
+              padding: '24px 26px',
+              borderRadius: '16px',
+              cursor: 'pointer',
+              opacity: 0.55,
+              transform: 'scale(0.96) translateX(-12px)',
+              transition: 'opacity 0.45s ease, transform 0.45s cubic-bezier(0.22,1,0.36,1)',
+            }}
+          >
+            <p style={{
+              margin: '0 0 8px',
+              fontSize: '0.62rem',
+              letterSpacing: '0.10em',
+              textTransform: 'uppercase',
+              color: 'var(--text2)',
+              fontFamily: 'var(--font-space-grotesk)',
+            }}>
+              siguiente →
+            </p>
+            <h3 style={{
+              margin: 0,
+              fontSize: '0.82rem',
+              fontWeight: '600',
+              fontFamily: 'var(--font-space-grotesk)',
+              lineHeight: 1.35,
+              color: 'var(--text2)',
+            }}>
+              {FAQS[nextIdx].q}
+            </h3>
+          </div>
+        </div>
+
+        {/* Dots */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '8px',
+          marginTop: '32px',
+        }}>
+          {FAQS.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => go(i)}
+              aria-label={`Pregunta ${i + 1}`}
+              style={{
+                width: i === active ? '28px' : '7px',
+                height: '7px',
+                borderRadius: '9999px',
+                background: i === active
+                  ? 'linear-gradient(90deg, rgb(65,110,235), rgb(130,55,230))'
+                  : 'rgba(0,0,0,0.15)',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 0,
+                transition: 'width 0.35s cubic-bezier(0.22,1,0.36,1), background 0.3s',
+              }}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
