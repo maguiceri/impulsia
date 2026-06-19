@@ -44,6 +44,7 @@ export default function HowWeWorkSection() {
   }, []);
 
   useEffect(() => {
+    if (active >= 0) return; // ya disparó en un layout previo
     const el = stepsRef.current;
     if (!el) return;
     const obs = new IntersectionObserver(
@@ -57,7 +58,7 @@ export default function HowWeWorkSection() {
     );
     obs.observe(el);
     return () => obs.disconnect();
-  }, []);
+  }, [isMobile, active]); // re-corre cuando cambia el layout (desktop ↔ mobile)
 
   const lineW = active < 0 ? 0 : Math.min(((active + 1) / (STEPS.length - 1)) * 100, 100);
 
@@ -167,7 +168,7 @@ export default function HowWeWorkSection() {
                   </div>
 
                   {!isLast && (
-                    <div style={{ width: '2px', flex: 1, minHeight: '48px', background: 'rgba(65,110,235,0.10)', borderRadius: '2px', overflow: 'hidden', margin: '4px 0', opacity: active < 0 ? 0 : 1, transition: 'opacity 0.4s ease' }}>
+                    <div style={{ width: '2px', flex: 1, minHeight: '48px', background: 'rgba(65,110,235,0.10)', borderRadius: '2px', overflow: 'hidden', margin: '4px 0' }}>
                       <div style={{
                         width: '100%',
                         height: on ? '100%' : '0%',
