@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import FadeIn from './FadeIn';
 
 const FAQS = [
@@ -36,8 +36,10 @@ const INTERVAL = 4200;
 function mod(n: number, m: number) { return ((n % m) + m) % m; }
 
 export default function FaqSection() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [active, setActive]   = useState(0);
+  const [paused, setPaused]   = useState(false);
+  const [isMobile, setMobile] = useState(false);
+  const touchX = useRef<number | null>(null);
 
   const next = useCallback(() => setActive(a => mod(a + 1, N)), []);
 
@@ -45,6 +47,13 @@ export default function FaqSection() {
     setActive(i);
     setPaused(true);
     setTimeout(() => setPaused(false), 7000);
+  }, []);
+
+  useEffect(() => {
+    const check = () => setMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check, { passive: true });
+    return () => window.removeEventListener('resize', check);
   }, []);
 
   useEffect(() => {
@@ -96,120 +105,72 @@ export default function FaqSection() {
         </div>
       </FadeIn>
 
-      {/* Carousel — 3 visible: prev · active · next */}
+      {/* Carousel */}
       <div
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1.7fr 1fr',
-          gap: '16px',
-          alignItems: 'start',
-        }}>
-          {/* Prev */}
+        {isMobile ? (
+          /* ── Mobile: single card + arrow buttons ── */
           <div
-            onClick={() => go(prev)}
-            className="glass-card"
-            style={{
-              padding: '24px 26px',
-              borderRadius: '16px',
-              cursor: 'pointer',
-              opacity: 0.55,
-              transform: 'scale(0.96) translateX(12px)',
-              transition: 'opacity 0.45s ease, transform 0.45s cubic-bezier(0.22,1,0.36,1)',
+            onTouchStart={e => { touchX.current = e.touches[0].clientX; }}
+            onTouchEnd={e => {
+              if (touchX.current === null) return;
+              const dx = e.changedTouches[0].clientX - touchX.current;
+              if (dx < -40) go(nextIdx);
+              else if (dx > 40) go(prev);
+              touchX.current = null;
             }}
           >
-            <p style={{
-              margin: '0 0 8px',
-              fontSize: '0.62rem',
-              letterSpacing: '0.10em',
-              textTransform: 'uppercase',
-              color: 'var(--text2)',
-              fontFamily: 'var(--font-space-grotesk)',
-            }}>
-              ← anterior
-            </p>
-            <h3 style={{
-              margin: 0,
-              fontSize: '0.82rem',
-              fontWeight: '600',
-              fontFamily: 'var(--font-space-grotesk)',
-              lineHeight: 1.35,
-              color: 'var(--text2)',
-            }}>
-              {FAQS[prev].q}
-            </h3>
-          </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <button onClick={() => go(prev)} aria-label="Anterior" style={{
+                flexShrink: 0, width: '36px', height: '36px', borderRadius: '50%',
+                border: '1px solid rgba(65,110,235,0.22)', background: 'rgba(255,255,255,0.8)',
+                cursor: 'pointer', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>←</button>
 
-          {/* Active */}
-          <div
-            className="glass-card"
-            style={{
-              padding: '36px 40px',
-              borderRadius: '20px',
-              border: '1px solid rgba(65,110,235,0.28)',
-              boxShadow: '0 4px 0 rgba(65,110,235,0.10), 0 24px 64px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.95)',
-              transform: 'scale(1)',
-              transition: 'transform 0.45s cubic-bezier(0.22,1,0.36,1)',
-            }}
-          >
-            <h3 style={{
-              margin: '0 0 16px',
-              fontSize: '1rem',
-              fontWeight: '700',
-              fontFamily: 'var(--font-space-grotesk)',
-              lineHeight: 1.3,
-              letterSpacing: '-0.01em',
-            }}>
-              {FAQS[active].q}
-            </h3>
-            <p style={{
-              margin: 0,
-              fontSize: '0.9rem',
-              color: 'var(--text2)',
-              lineHeight: 1.75,
-              fontFamily: 'var(--font-space-grotesk)',
-            }}>
-              {FAQS[active].a}
-            </p>
-          </div>
+              <div className="glass-card" style={{
+                flex: 1, padding: '28px 24px', borderRadius: '20px',
+                border: '1px solid rgba(65,110,235,0.28)',
+                boxShadow: '0 4px 0 rgba(65,110,235,0.10), 0 24px 64px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.95)',
+              }}>
+                <h3 style={{ margin: '0 0 14px', fontSize: '0.95rem', fontWeight: '700', fontFamily: 'var(--font-space-grotesk)', lineHeight: 1.3, letterSpacing: '-0.01em' }}>
+                  {FAQS[active].q}
+                </h3>
+                <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--text2)', lineHeight: 1.75, fontFamily: 'var(--font-space-grotesk)' }}>
+                  {FAQS[active].a}
+                </p>
+              </div>
 
-          {/* Next */}
-          <div
-            onClick={() => go(nextIdx)}
-            className="glass-card"
-            style={{
-              padding: '24px 26px',
-              borderRadius: '16px',
-              cursor: 'pointer',
-              opacity: 0.55,
-              transform: 'scale(0.96) translateX(-12px)',
-              transition: 'opacity 0.45s ease, transform 0.45s cubic-bezier(0.22,1,0.36,1)',
-            }}
-          >
-            <p style={{
-              margin: '0 0 8px',
-              fontSize: '0.62rem',
-              letterSpacing: '0.10em',
-              textTransform: 'uppercase',
-              color: 'var(--text2)',
-              fontFamily: 'var(--font-space-grotesk)',
-            }}>
-              siguiente →
-            </p>
-            <h3 style={{
-              margin: 0,
-              fontSize: '0.82rem',
-              fontWeight: '600',
-              fontFamily: 'var(--font-space-grotesk)',
-              lineHeight: 1.35,
-              color: 'var(--text2)',
-            }}>
-              {FAQS[nextIdx].q}
-            </h3>
+              <button onClick={() => go(nextIdx)} aria-label="Siguiente" style={{
+                flexShrink: 0, width: '36px', height: '36px', borderRadius: '50%',
+                border: '1px solid rgba(65,110,235,0.22)', background: 'rgba(255,255,255,0.8)',
+                cursor: 'pointer', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>→</button>
+            </div>
           </div>
-        </div>
+        ) : (
+          /* ── Desktop: 3-column prev · active · next ── */
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.7fr 1fr', gap: '16px', alignItems: 'start' }}>
+            {/* Prev */}
+            <div onClick={() => go(prev)} className="glass-card" style={{ padding: '24px 26px', borderRadius: '16px', cursor: 'pointer', opacity: 0.55, transform: 'scale(0.96) translateX(12px)', transition: 'opacity 0.45s ease, transform 0.45s cubic-bezier(0.22,1,0.36,1)' }}>
+              <p style={{ margin: '0 0 8px', fontSize: '0.62rem', letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--text2)', fontFamily: 'var(--font-space-grotesk)' }}>← anterior</p>
+              <h3 style={{ margin: 0, fontSize: '0.82rem', fontWeight: '600', fontFamily: 'var(--font-space-grotesk)', lineHeight: 1.35, color: 'var(--text2)' }}>{FAQS[prev].q}</h3>
+            </div>
+
+            {/* Active */}
+            <div className="glass-card" style={{ padding: '36px 40px', borderRadius: '20px', border: '1px solid rgba(65,110,235,0.28)', boxShadow: '0 4px 0 rgba(65,110,235,0.10), 0 24px 64px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.95)' }}>
+              <h3 style={{ margin: '0 0 16px', fontSize: '1rem', fontWeight: '700', fontFamily: 'var(--font-space-grotesk)', lineHeight: 1.3, letterSpacing: '-0.01em' }}>{FAQS[active].q}</h3>
+              <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--text2)', lineHeight: 1.75, fontFamily: 'var(--font-space-grotesk)' }}>{FAQS[active].a}</p>
+            </div>
+
+            {/* Next */}
+            <div onClick={() => go(nextIdx)} className="glass-card" style={{ padding: '24px 26px', borderRadius: '16px', cursor: 'pointer', opacity: 0.55, transform: 'scale(0.96) translateX(-12px)', transition: 'opacity 0.45s ease, transform 0.45s cubic-bezier(0.22,1,0.36,1)' }}>
+              <p style={{ margin: '0 0 8px', fontSize: '0.62rem', letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--text2)', fontFamily: 'var(--font-space-grotesk)' }}>siguiente →</p>
+              <h3 style={{ margin: 0, fontSize: '0.82rem', fontWeight: '600', fontFamily: 'var(--font-space-grotesk)', lineHeight: 1.35, color: 'var(--text2)' }}>{FAQS[nextIdx].q}</h3>
+            </div>
+          </div>
+        )}
 
         {/* Dots */}
         <div style={{

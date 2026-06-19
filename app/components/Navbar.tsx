@@ -52,7 +52,7 @@ export default function Navbar() {
           width: 'min(960px, calc(100vw - 48px))',
         }}>
           {/* Logo — nav-pill-logo gets flex:1 on mobile to push hamburger right and center logo */}
-          <a href="#" onClick={() => setOpen(false)} className="nav-pill-logo" style={{ textDecoration: 'none', marginRight: '8px', flexShrink: 0 }}>
+          <a href="#" onClick={() => setOpen(false)} className="nav-pill-logo" style={{ textDecoration: 'none', marginRight: '8px', flexShrink: 0, display: 'flex', alignItems: 'center' }}>
             <Logo size="sm" />
           </a>
 
@@ -66,14 +66,14 @@ export default function Navbar() {
                 textDecoration: 'none',
                 fontSize: '0.82rem',
                 fontFamily: 'var(--font-space-grotesk)',
-                color: 'rgba(0,0,0,0.50)',
+                color: 'rgba(0,0,0,0.72)',
                 padding: '7px 14px',
                 borderRadius: '9999px',
                 whiteSpace: 'nowrap',
                 transition: 'color 0.15s, background 0.15s',
               }}
               onMouseEnter={e => { e.currentTarget.style.color = 'rgba(0,0,0,0.85)'; e.currentTarget.style.background = 'rgba(0,0,0,0.04)'; }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(0,0,0,0.50)'; e.currentTarget.style.background = 'transparent'; }}>
+              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(0,0,0,0.72)'; e.currentTarget.style.background = 'transparent'; }}>
                 {label}
               </a>
             ))}
