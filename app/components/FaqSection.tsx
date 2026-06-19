@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import FadeIn from './FadeIn';
 
+
 const FAQS = [
   {
     q: '¿Qué tipo de sistemas desarrolla Impulsia?',
@@ -106,6 +107,7 @@ export default function FaqSection() {
       </FadeIn>
 
       {/* Carousel */}
+      <FadeIn delay={150} style={{ height: 'auto' }}>
       <div
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
@@ -200,6 +202,7 @@ export default function FaqSection() {
           ))}
         </div>
       </div>
+      </FadeIn>
     </section>
   );
 }

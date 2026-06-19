@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import FadeIn from './FadeIn';
 
 const CLIENTS = [
   {
@@ -293,15 +294,17 @@ export default function ClientCasesSection() {
 
   return (
     <section ref={ref} className="section-inner" style={{ padding: '88px 28px 100px', maxWidth: '1100px', margin: '0 auto', minHeight: '100vh' }}>
-      <div className="glass-card" style={{ marginBottom: '56px', padding: '32px 36px', borderRadius: '16px' }}>
-        <p style={{ margin: '0 0 12px', fontSize: '0.65rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontFamily: 'var(--font-space-grotesk)', fontWeight: '600', background: 'linear-gradient(135deg, rgb(65,110,235), rgb(15,195,228))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-          Casos reales
-        </p>
-        <h2 style={{ margin: 0, fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: '700', lineHeight: 1.2, letterSpacing: '-0.01em', fontFamily: 'var(--font-space-grotesk)' }}>
-          Negocios que ya{' '}
-          <span style={{ color: 'var(--text2)', fontWeight: '400' }}>trabajan en automático</span>
-        </h2>
-      </div>
+      <FadeIn style={{ height: 'auto', marginBottom: '56px' }}>
+        <div className="glass-card" style={{ padding: '32px 36px', borderRadius: '16px' }}>
+          <p style={{ margin: '0 0 12px', fontSize: '0.65rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontFamily: 'var(--font-space-grotesk)', fontWeight: '600', background: 'linear-gradient(135deg, rgb(65,110,235), rgb(15,195,228))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            Casos reales
+          </p>
+          <h2 style={{ margin: 0, fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: '700', lineHeight: 1.2, letterSpacing: '-0.01em', fontFamily: 'var(--font-space-grotesk)' }}>
+            Negocios que ya{' '}
+            <span style={{ color: 'var(--text2)', fontWeight: '400' }}>trabajan en automático</span>
+          </h2>
+        </div>
+      </FadeIn>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
         {CLIENTS.map((client, i) => (

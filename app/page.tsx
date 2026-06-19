@@ -125,6 +125,7 @@ export default function HeroPage() {
         margin: '0 auto',
         textAlign: 'center',
       }}>
+        <FadeIn style={{ height: 'auto' }}>
         <div className="glass-card" style={{ padding: '32px 40px', borderRadius: '20px' }}>
           <p style={{
             margin: '0 0 12px',
@@ -149,6 +150,7 @@ export default function HeroPage() {
             {'Impulsia es un estudio de software que diseña y desarrolla sistemas a medida para negocios en crecimiento. Trabaja con pequeñas y medianas empresas que necesitan automatizar procesos, centralizar información o construir herramientas propias. Los proyectos incluyen diagnóstico, desarrollo, integración y soporte continuo.'}
           </TextReveal>
         </div>
+        </FadeIn>
       </section>
 
       {/* Ticker strip */}

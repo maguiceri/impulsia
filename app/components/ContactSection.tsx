@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import FadeIn from './FadeIn';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
@@ -46,8 +47,9 @@ export default function ContactSection() {
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       padding: '80px 20px',
     }}>
+      <FadeIn style={{ height: 'auto', width: '100%', maxWidth: '960px' }}>
       <div className="contact-grid glass-card" style={{
-        width: '100%', maxWidth: '960px',
+        width: '100%',
         borderRadius: '24px',
         overflow: 'hidden',
         display: 'grid', gridTemplateColumns: '1fr 1fr',
@@ -185,6 +187,7 @@ export default function ContactSection() {
           )}
         </div>
       </div>
+      </FadeIn>
     </section>
   );
 }
